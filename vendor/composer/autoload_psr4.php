@@ -15,4 +15,5 @@ return array(
     'Sabre\\DAVACL\\' => array($vendorDir . '/sabre/dav/lib/DAVACL'),
     'Sabre\\CardDAV\\' => array($vendorDir . '/sabre/dav/lib/CardDAV'),
     'Sabre\\CalDAV\\' => array($vendorDir . '/sabre/dav/lib/CalDAV'),
+    'Phalcon\\' => array($vendorDir . '/phalcon/devtools/scripts/Phalcon'),
 );

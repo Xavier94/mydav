@@ -4,9 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e63e221ebb8947c1701690fd8c086dd5",
-    "content-hash": "d0c42f2ca48f5f7fa83efa035f377c67",
+    "hash": "0fde215c6ec7fef6bf4c65c2eb1d94fc",
+    "content-hash": "2592c22fef377cdb5c77bbe6bcb38728",
     "packages": [
+        {
+            "name": "phalcon/devtools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phalcon/phalcon-devtools.git",
+                "reference": "20f978d4098f3db766888ce7d015f85a5d7436ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phalcon/phalcon-devtools/zipball/20f978d4098f3db766888ce7d015f85a5d7436ee",
+                "reference": "20f978d4098f3db766888ce7d015f85a5d7436ee",
+                "shasum": ""
+            },
+            "require": {
+                "ext-phalcon": "~2.0",
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "kherge/box": ">=2.5.2"
+            },
+            "bin": [
+                "phalcon.php"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phalcon\\": "scripts/Phalcon/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Phalcon Team",
+                    "email": "team@phalconphp.com"
+                }
+            ],
+            "description": "This tools provide you useful scripts to generate code helping to develop faster and easy applications that use with Phalcon framework.",
+            "homepage": "http://phalconphp.com",
+            "keywords": [
+                "Devtools",
+                "framework",
+                "phalcon",
+                "phar",
+                "webtools"
+            ],
+            "time": "2015-11-25 21:36:49"
+        },
         {
             "name": "sabre/dav",
             "version": "3.0.5",
@@ -369,7 +420,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "phalcon/devtools": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
