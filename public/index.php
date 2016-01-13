@@ -1,5 +1,7 @@
 <?php
 
+require '../vendor/autoload.php';
+
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
