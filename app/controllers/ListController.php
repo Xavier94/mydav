@@ -1,9 +1,8 @@
 <?php
 
 use Sabre\DAV;
-use Phalcon\Mvc\Controller;
 
-class ListController extends Controller
+class ListController extends ControllerBase
 {
 	public function indexAction()
 	{
