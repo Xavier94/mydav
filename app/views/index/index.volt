@@ -7,7 +7,7 @@
 
 			<p>
 				MyDAV new program for special personnal's study.
-				{{ link_to('') }}
+				{{ link_to('list', 'Mes fichiers') }}
 			</p>
 
 			<p>{{ link_to('register', 'Créer un compte', 'class': 'pure-button') }}</p>
