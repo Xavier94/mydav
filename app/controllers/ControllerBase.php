@@ -9,7 +9,7 @@ class ControllerBase extends Controller
     {
         $this->tag->prependTitle(' MyDAV');
         $this->tag->prependTitle(' MyDAV');
-        $this->view->setTemplateAfter('main');
+        //$this->view->setTemplateAfter('main');
     }
 
     protected function forward($uri)
