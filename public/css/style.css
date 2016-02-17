@@ -33,6 +33,8 @@ h3 {
     padding: 0;
 }
 
+/* HEADER */
+
 .header {
     text-align: center;
     top: auto;
@@ -81,6 +83,8 @@ h3 {
     text-decoration: none;
 }
 
+/* CONTENT */
+
 .content-subhead {
     text-transform: uppercase;
     color: #aaa;
@@ -94,6 +98,11 @@ h3 {
 .content {
     padding: 2em 1em 0;
 }
+
+.filesystem {}
+.file {
+    padding-bottom: 2em;
+    }
 
 .post {
     padding-bottom: 2em;
@@ -149,6 +158,8 @@ h3 {
     text-shadow: 0 1px 1px #333;
 }
 
+/* FOOTER */
+
 .footer {
     text-align: center;
     padding: 1em 0;
@@ -161,6 +172,8 @@ h3 {
 .footer .pure-menu a:focus {
     background: none;
 }
+
+/* RESPONSIVE */
 
 @media (min-width: 48em) {
     .content {

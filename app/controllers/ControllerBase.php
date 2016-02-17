@@ -7,8 +7,7 @@ class ControllerBase extends Controller
 
     protected function initialize()
     {
-        $this->tag->prependTitle(' MyDAV');
-        $this->tag->prependTitle(' MyDAV');
+        $this->tag->appendTitle(' - MyDAV');
         //$this->view->setTemplateAfter('main');
     }
 

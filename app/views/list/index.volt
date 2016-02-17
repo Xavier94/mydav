@@ -1,17 +1,15 @@
 <div id="layout" class="pure-g">
 	<div class="sidebar pure-u-1 pure-u-md-1-4">
 		<div class="header">
-			<h1 class="brand-title">A Sample Blog</h1>
-
-			<h2 class="brand-tagline">Creating a blog layout using Pure</h2>
-
+			<h1 class="brand-title">MyDAV app</h1>
+			<h2 class="brand-tagline">Path / path 2</h2>
 			<nav class="nav">
 				<ul class="nav-list">
 					<li class="nav-item">
-						<a class="pure-button" href="http://purecss.io">Pure</a>
+						<a class="pure-button" href="#">Add file</a>
 					</li>
 					<li class="nav-item">
-						<a class="pure-button" href="http://yuilibrary.com">YUI Library</a>
+						<a class="pure-button" href="#">Create directory</a>
 					</li>
 				</ul>
 			</nav>
@@ -20,11 +18,19 @@
 
 	<div class="content pure-u-1 pure-u-md-3-4">
 		<div>
-			<!-- A wrapper for all the blog posts -->
-			<div class="posts">
-				<h1 class="content-subhead">Pinned Post</h1>
 
-				<!-- A single blog post -->
+			<div class="filesystem">
+				<section class="file">
+					<ul>
+						{% for file in filelist %}
+							<li>{{ file }}</li>
+						{% endfor %}
+					</ul>
+				</section>
+			</div>
+
+			<div class="posts">
+				<h1 class="content-subhead">{{ file }}</h1>
 				<section class="post">
 					<header class="post-header">
 						<img class="post-avatar" alt="Tilo Mitra&#x27;s avatar" height="48" width="48" src="img/common/tilo-avatar.png">
@@ -37,7 +43,6 @@
 							<a class="post-category post-category-pure" href="#">Pure</a>
 						</p>
 					</header>
-
 					<div class="post-description">
 						<p>
 							Yesterday at CSSConf, we launched Pure ? a new CSS library. Phew! Here are the
@@ -49,6 +54,7 @@
 					</div>
 				</section>
 			</div>
+
 
 			<div class="posts">
 				<h1 class="content-subhead">Recent Posts</h1>
@@ -140,11 +146,8 @@
 			<div class="footer">
 				<div class="pure-menu pure-menu-horizontal">
 					<ul>
-						<li class="pure-menu-item"><a href="http://purecss.io/" class="pure-menu-link">About</a></li>
-						<li class="pure-menu-item"><a href="http://twitter.com/yuilibrary/" class="pure-menu-link">Twitter</a>
-						</li>
-						<li class="pure-menu-item">
-							<a href="http://github.com/yahoo/pure/" class="pure-menu-link">GitHub</a></li>
+						<li class="pure-menu-item"><a href="#" class="pure-menu-link">About</a></li>
+						<li class="pure-menu-item"><a href="#" class="pure-menu-link">GitHub</a></li>
 					</ul>
 				</div>
 			</div>
