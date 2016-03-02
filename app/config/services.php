@@ -64,18 +64,32 @@ $di->set('view', function () use ($config) {
 /**
  * Setting up volt
  */
-$di->set('volt', function ($view, $di) {
+$di->set('volt', function ($view, $di)
+{
+    $volt = new VoltEngine($view, $di);
 
-	$volt = new VoltEngine($view, $di);
+    $volt->setOptions(array(
+        "compiledPath" => APP_PATH . "cache/volt/"
+    ));
 
-	$volt->setOptions(array(
-		"compiledPath" => APP_PATH . "cache/volt/"
-	));
+    $compiler = $volt->getCompiler();
+    $compiler->addFunction('is_a', 'is_a');
+    /*
+    $compiler->addFilter('human_filesize',
+        function ($size)
+        {
+            $size = floatval($size);
+            if (($size >= 1 << 30))
+                return "number_format(" . $size / (1 << 30) . ", 2, ',', ' ') . 'Go'";
+            if (($size >= 1 << 20))
+                return "number_format(" . $size / (1 << 20) . ", 2, ',', ' ') . 'Mo'";
+            if (($size >= 1 << 10))
+                return "number_format(" . $size / (1 << 10) . ", 2, ',', ' ') . 'Ko'";
+            return "number_format(" . $size . ") . ' o'";
+        });
+    */
 
-	$compiler = $volt->getCompiler();
-	$compiler->addFunction('is_a', 'is_a');
-
-	return $volt;
+    return $volt;
 }, true);
 
 /**
@@ -124,3 +138,14 @@ $di->set('flash', function () {
 $di->set('elements', function () {
 	return new Elements();
 });
+
+/**
+ * MongoDB
+ */
+$di->set('mongo', function() {
+    $mongo = new MongoClient();
+    return $mongo->selectDb("files");
+}, true);
+$di->set('collectionManager', function(){
+    return new Phalcon\Mvc\Collection\Manager();
+}, true);

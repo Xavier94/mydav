@@ -11,14 +11,24 @@ class ListController extends ControllerBase
     public function indexAction()
     {
         //$info     = new SplFileInfo(APP_PATH . 'data');
+
+        // See how use session for home directory and ($_GET['path'] or url rewritting)
+
         $iterator = new FilesystemIterator(APP_PATH . 'data/xavier');
         //$filter   = new RegexIterator($iterator, '/t.(php|dat)$/');
+        /*
         $filelist = array();
         foreach ($iterator as $entry)
         {
-            $filelist[] = $entry->getFilename();
+            $filelist[] = array(
+                'filename' => $entry->getFilename(),
+                'realpath' => '/', // See config or DI
+                'info' => '',
+            );
         }
         $this->view->setVar('filelist', $filelist);
+        */
+        $this->view->setVar('filelist', $iterator);
     }
 
     public function uploadAction()
@@ -36,5 +46,36 @@ class ListController extends ControllerBase
             }
         }
         //$this->view->disable();
+    }
+
+    public function createDirAction()
+    {
+        $this->view->disable();
+        if ($this->request->isPost() == true && $this->request->isAjax() == true)
+        {
+            echo json_encode(array('s' => true));
+            return;
+        }
+        echo json_encode(array('s' => false));
+    }
+
+    public function createAction()
+    {
+        $file       = new Files();
+        $file->type = "video";
+        $file->name = "Astro Boy";
+        $file->year = 1952;
+        if ($file->save() == false)
+        {
+            echo "Umh, We can't store files right now: \n";
+            foreach ($file->getMessages() as $message)
+            {
+                echo $message, "\n";
+            }
+        }
+        else
+        {
+            echo "Great, a new file was saved successfully !";
+        }
     }
 }

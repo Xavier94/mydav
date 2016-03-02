@@ -2,7 +2,7 @@
 	<div class="sidebar pure-u-1 pure-u-md-1-4">
 		<div class="header">
 			<h1 class="brand-title">MyDAV app</h1>
-			<h2 class="brand-tagline">Path / path 2</h2>
+			<h2 class="brand-tagline">My home : /xavier</h2>
 			<nav class="nav">
 				<ul class="nav-list">
 					<li class="nav-item">
@@ -20,13 +20,16 @@
 		<div>
 
 			<div class="filesystem">
-				<section class="file">
-					<ul>
-						{% for file in filelist %}
-							<li>{{ file }}</li>
-						{% endfor %}
-					</ul>
-				</section>
+				<ul>
+					{% for file in filelist %}
+						<li class="file file-type-{{ file.getType() }}">
+							<a href="?{{ file.getFilename() | url_encode }}">
+								{{ file.getType() }} - {{ file.getFilename() }}
+								<span>({{ file.getSize() }} octets)</span>
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
 			</div>
 
 			<div class="posts">
