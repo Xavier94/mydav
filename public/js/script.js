@@ -1,29 +1,67 @@
-// IIFE - Immediately Invoked Function Expression
+/**
+ * IIFE - Immediately Invoked Function Expression
+ */
 (function(window, document, $) {
-	// Listen for the jQuery ready event on the document
+	/**
+	 * Listen for the jQuery ready event on the document
+	 */
 	$(function() {
 
-		function getName(personID) {
-			var dynamicData = {};
-			dynamicData["id"] = personID;
-			return $.ajax({
-				url: "getName.php",
-				type: "get",
-				data: dynamicData
-			});
-		}
-
-		// Use promise
-		getName("2342342").done(function (data) {
-			// Updates the UI based the ajax result
-			$(".person-name").text(data.name);
-		});
+		$('#dir-create').doOnce(dirCreate.init);
 
 	});
-	// The rest of the code goes here!
+
+	/**
+	 * The rest of the code goes here!
+	 */
+
+	var dirCreate = {
+		init: function(settings) {
+			dirCreate.config = {
+				form: $('#form-dir-create'),
+				groupFile: $('#list-filesystem'),
+				button: $('#dir-create')
+			};
+			// Allow overriding the default config
+			$.extend(dirCreate.config, settings);
+			dirCreate.setup();
+		},
+		setup: function() {
+			dirCreate.config.button.on('click', function(e) {
+				e.preventDefault();
+				dirCreate.showForm();
+				dirCreate.config.form.on('click', '#form-dir-create-submit', dirCreate.submitAction);
+			});
+		},
+		submitAction: function(e) {
+			e.preventDefault();
+			var promise = dirCreate.sendAction();
+			promise.done(function(data) { // Use promise
+				// Updates the UI based the ajax result
+				console.log(data);
+				if (data.status) {
+					dirCreate.hideForm();
+				}
+				else {
+					dirCreate.config.form.find('.error').html('ERROR: not create !');
+				}
+			});
+			promise.fail(function(data) {
+				dirCreate.config.form.find('.error').html('ERROR: not create !');
+			});
+		},
+		sendAction: function() {
+			return $.post(dirCreate.config.form.attr('action'), dirCreate.config.form.serialize());
+		},
+		showForm: function() {
+			dirCreate.config.form.show();
+		},
+		hideForm: function() {
+			dirCreate.config.form.hide();
+		}
+	};
+
 }(window, document, window.jQuery));
-
-
 
 /**
  * Don't Act on Absent Elements - Best: Add a doOnce plugin.

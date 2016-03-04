@@ -8,13 +8,21 @@ class ListController extends ControllerBase
         parent::initialize();
     }
 
+    /**
+     * @todo : need control on '/../../../../../../../'
+     */
     public function indexAction()
     {
         //$info     = new SplFileInfo(APP_PATH . 'data');
-
         // See how use session for home directory and ($_GET['path'] or url rewritting)
 
-        $iterator = new FilesystemIterator(APP_PATH . 'data/xavier');
+        $this->view->setVar('path', '/');
+        $path = $this->request->get('path');
+        if ($path)
+        {
+            $this->view->setVar('path', $path);
+        }
+        $iterator = new FilesystemIterator(APP_PATH . 'data/xavier' . $path);
         //$filter   = new RegexIterator($iterator, '/t.(php|dat)$/');
         /*
         $filelist = array();
@@ -48,18 +56,41 @@ class ListController extends ControllerBase
         //$this->view->disable();
     }
 
-    public function createDirAction()
+    public function createAction()
     {
-        $this->view->disable();
+        $ret = array('status' => false, 'msg' => 'error-need-filename');
         if ($this->request->isPost() == true && $this->request->isAjax() == true)
         {
-            echo json_encode(array('s' => true));
-            return;
+            $action = $this->request->getPost("action", array("string", "trim", "lower"));
+            $dir_path = $this->request->getPost("path");
+            $dir_name = $this->request->getPost("name");
+            if ($action === 'dir-create' && $dir_path !== '' && $dir_name !== '')
+            {
+                if (is_dir(APP_PATH . 'data/xavier/' . $dir_path . '/' . $dir_name))
+                {
+                    $ret = array('status' => false, 'msg' => 'error-dir-exist');
+                }
+                elseif (!mkdir(APP_PATH . 'data/xavier/' . $dir_path . '/' . $dir_name))
+                {
+                    $ret = array('status' => false, 'msg' => 'error-dir-not-create');
+                }
+                else
+                {
+                    $ret = array('status' => true, 'msg' => 'ok');
+                }
+            }
         }
-        echo json_encode(array('s' => false));
+        $this->response->setContentType('application/json', 'UTF-8');
+        $this->response->setJsonContent($ret);
+        $this->view->disable();
+        return $this->response;
+         // JSON identified ???
+        //if ($this->request->getBestAccept() == 'application/json')
+        //{
+        //}
     }
 
-    public function createAction()
+    public function createMongoAction()
     {
         $file       = new Files();
         $file->type = "video";

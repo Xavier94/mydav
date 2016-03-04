@@ -2,14 +2,22 @@
 	<div class="sidebar pure-u-1 pure-u-md-1-4">
 		<div class="header">
 			<h1 class="brand-title">MyDAV app</h1>
-			<h2 class="brand-tagline">My home : /xavier</h2>
+			<h2 class="brand-tagline">My home</h2>
 			<nav class="nav">
 				<ul class="nav-list">
 					<li class="nav-item">
 						<a class="pure-button" href="#">Add file</a>
 					</li>
 					<li class="nav-item">
-						<a class="pure-button" href="#">Create directory</a>
+						<a id="dir-create" class="pure-button" href="#">Create directory</a>
+						<form id="form-dir-create" action="/list/create" method="post">
+							<label for="form-dir-create-name">Directory name</label>
+							<input id="form-dir-create-name" type="text" name="name" value="">
+							<input type="hidden" name="path" value="{{ path }}">
+							<input type="hidden" name="action" value="dir-create">
+							<input id="form-dir-create-submit" type="submit" value="Create">
+							<div class="error"></div>
+						</form>
 					</li>
 				</ul>
 			</nav>
@@ -20,11 +28,11 @@
 		<div>
 
 			<div class="filesystem">
-				<ul>
+				<ul id="list-filesystem">
 					{% for file in filelist %}
 						<li class="file file-type-{{ file.getType() }}">
-							<a href="?{{ file.getFilename() | url_encode }}">
-								{{ file.getType() }} - {{ file.getFilename() }}
+							<a href="?f={{ file.getFilename() | url_encode }}">
+								{{ file.getFilename() }} ({{ file.getType() }})
 								<span>({{ file.getSize() }} octets)</span>
 							</a>
 						</li>
@@ -33,7 +41,7 @@
 			</div>
 
 			<div class="posts">
-				<h1 class="content-subhead">{{ file }}</h1>
+				<h1 class="content-subhead">Tokill</h1>
 				<section class="post">
 					<header class="post-header">
 						<img class="post-avatar" alt="Tilo Mitra&#x27;s avatar" height="48" width="48" src="img/common/tilo-avatar.png">
