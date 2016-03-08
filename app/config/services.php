@@ -124,12 +124,15 @@ $di->set('session', function () {
  * Register the flash service with custom CSS classes
  */
 $di->set('flash', function () {
+    return new Phalcon\Flash\Direct();
+    /*
 	return new FlashSession(array(
 		'error'   => 'alert alert-danger',
 		'success' => 'alert alert-success',
 		'notice'  => 'alert alert-info',
 		'warning' => 'alert alert-warning'
 	));
+    */
 });
 
 /**

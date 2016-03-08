@@ -15,6 +15,7 @@
 							<input id="form-dir-create-name" type="text" name="name" value="">
 							<input type="hidden" name="path" value="{{ path }}">
 							<input type="hidden" name="action" value="dir-create">
+							<a href="#">Cancel</a>
 							<input id="form-dir-create-submit" type="submit" value="Create">
 							<div class="error"></div>
 						</form>
@@ -26,18 +27,22 @@
 
 	<div class="content pure-u-1 pure-u-md-3-4">
 		<div>
-
 			<div class="filesystem">
-				<ul id="list-filesystem">
-					{% for file in filelist %}
-						<li class="file file-type-{{ file.getType() }}">
-							<a href="?f={{ file.getFilename() | url_encode }}">
-								{{ file.getFilename() }} ({{ file.getType() }})
-								<span>({{ file.getSize() }} octets)</span>
-							</a>
-						</li>
-					{% endfor %}
-				</ul>
+				{{ content() }}
+				{% if filelist !== null %}
+					<ul id="list-filesystem">
+						{% for file in filelist %}
+							<li class="file file-type-{{ file.getType() }}">
+								<a href="?f=/{{ file.getFilename() | url_encode }}">
+									{{ file.getFilename() }} ({{ file.getType() }})
+									<span>({{ file.getSize() }} octets)</span>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<div><a href="/list">Back home</a></div>
+				{% endif %}
 			</div>
 
 			<div class="posts">

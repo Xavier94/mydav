@@ -13,29 +13,27 @@ class ListController extends ControllerBase
      */
     public function indexAction()
     {
-        //$info     = new SplFileInfo(APP_PATH . 'data');
-        // See how use session for home directory and ($_GET['path'] or url rewritting)
-
         $this->view->setVar('path', '/');
-        $path = $this->request->get('path');
+        $path = '/' . trim($this->request->get('f'), '/');
         if ($path)
         {
             $this->view->setVar('path', $path);
         }
-        $iterator = new FilesystemIterator(APP_PATH . 'data/xavier' . $path);
-        //$filter   = new RegexIterator($iterator, '/t.(php|dat)$/');
-        /*
-        $filelist = array();
-        foreach ($iterator as $entry)
+
+        try
         {
-            $filelist[] = array(
-                'filename' => $entry->getFilename(),
-                'realpath' => '/', // See config or DI
-                'info' => '',
-            );
+            $iterator = new FilesystemIterator(APP_PATH . 'data/xavier' . $path);
         }
-        $this->view->setVar('filelist', $filelist);
-        */
+        catch (UnexpectedValueException $e)
+        {
+            $iterator = null;
+            $this->flash->error("Directory not exist !");
+        }
+        catch (Exception $e)
+        {
+            $iterator = null;
+            $this->flash->error("You don't have permission to access this area");
+        }
         $this->view->setVar('filelist', $iterator);
     }
 

@@ -19,6 +19,7 @@
 		init: function(settings) {
 			dirCreate.config = {
 				form: $('#form-dir-create'),
+				inputDirName: $('#form-dir-create-name'),
 				groupFile: $('#list-filesystem'),
 				button: $('#dir-create')
 			};
@@ -31,6 +32,10 @@
 				e.preventDefault();
 				dirCreate.showForm();
 				dirCreate.config.form.on('click', '#form-dir-create-submit', dirCreate.submitAction);
+			});
+			dirCreate.config.form.on('click', 'a', function(e) {
+				e.preventDefault();
+				dirCreate.hideForm();
 			});
 		},
 		submitAction: function(e) {
@@ -58,6 +63,8 @@
 		},
 		hideForm: function() {
 			dirCreate.config.form.hide();
+			dirCreate.config.inputDirName.val('');
+			dirCreate.config.form.find('.error').html('');
 		}
 	};
 
