@@ -1,13 +1,15 @@
 /**
  * IIFE - Immediately Invoked Function Expression
  */
-(function(window, document, $) {
+;(function(window, document, $) {
 	/**
 	 * Listen for the jQuery ready event on the document
 	 */
 	$(function() {
 
 		$('#dir-create').doOnce(dirCreate.init);
+
+		$('.alert').doOnce(alert.init);
 
 	});
 
@@ -65,6 +67,21 @@
 			dirCreate.config.form.hide();
 			dirCreate.config.inputDirName.val('');
 			dirCreate.config.form.find('.error').html('');
+		}
+	};
+
+	var alert = {
+		init: function() {
+			alert.config = {
+				box: $('.alert')
+			};
+			alert.setup();
+		},
+		setup: function() {
+			alert.config.box.on('click', 'a', function(e) {
+				e.preventDefault();
+				$(this).parent().hide(200);
+			});
 		}
 	};
 

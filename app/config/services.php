@@ -8,6 +8,7 @@ use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaData;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Session as FlashSession;
+use Phalcon\Flash\Direct as FlashDirect;
 use Phalcon\Events\Manager as EventsManager;
 
 /**
@@ -124,7 +125,20 @@ $di->set('session', function () {
  * Register the flash service with custom CSS classes
  */
 $di->set('flash', function () {
-    return new Phalcon\Flash\Direct();
+    return new FlashCustom(array(
+		'error'   => 'alert alert-error',
+		'success' => 'alert alert-success',
+		'notice'  => 'alert alert-notice',
+		'warning' => 'alert alert-warning'
+	));
+    /*
+    return new FlashDirect(array(
+		'error'   => 'alert alert-error',
+		'success' => 'alert alert-success',
+		'notice'  => 'alert alert-notice',
+		'warning' => 'alert alert-warning'
+	));
+    */
     /*
 	return new FlashSession(array(
 		'error'   => 'alert alert-danger',

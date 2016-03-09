@@ -29,6 +29,7 @@
 		<div>
 			<div class="filesystem">
 				{{ content() }}
+
 				{% if filelist !== null %}
 					<ul id="list-filesystem">
 						{% for file in filelist %}

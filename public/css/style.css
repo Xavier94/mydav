@@ -23,22 +23,40 @@ h3 {
     font-weight: 100;
 }
 
-.successMessage {
-    color: #4b4b4b;
-    background-color: #8edf89;
-    border: 1px solid #63ff75;
+@keyframes alert {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 0; }
+}
+.alert {
+    display: block;
+    font: bold 16px/40px sans-serif;
+    height: 40px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top: -45px;
+    width: 100%;
+    animation: alert 1s ease forwards;
+    box-shadow: 0 3px 0 hsla(0,0%,0%,.1);
+    background-size: 20px 20px;
     }
-.errorMessage {
+.alert-success {
+    color: #4b4b4b;
+    background-color: #dff0d8;
+    border: 1px solid #3c763d;
+    }
+.alert-error {
     color: #4b4b4b;
     background-color: #ffc3be;
     border: 1px solid #ff4349;
     }
-.noticeMessage {
+.alert-notice {
     color: #4b4b4b;
     background-color: #d079df;
     border: 1px solid #b017ff;
     }
-.warningMessage {
+.alert-warning {
     color: #4b4b4b;
     background-color: #df9d21;
     border: 1px solid #ff8a01;
