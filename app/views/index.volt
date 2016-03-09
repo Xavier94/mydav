@@ -27,12 +27,14 @@
 <body>
 	{{ content() }}
 
-	{% for message in flash.getMessages() %}
-		<div class="alert alert-{{ message['type'] }}">
-			{{ message['text'] }}
-			<a href="#" class="close" title="close" aria-label="close">&times;</a>
-		</div>
-	{% endfor %}
+	<div class="alert-wrapper">
+		{% for message in flash.getMessages() %}
+			<div class="alert alert-{{ message['type'] }}">
+				{{ message['text'] }}
+				<a href="#" class="close" title="close" aria-label="close">&times;</a>
+			</div>
+		{% endfor %}
+	</div>
 
 	{{ javascript_include('js/jquery-1.12.0.min.js') }}
 	{{ javascript_include('js/script.js') }}

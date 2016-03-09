@@ -8,7 +8,7 @@ class FlashCustom extends Flash
      * Messages collection
      * @var array
      */
-    protected $messages;
+    protected $messages = [];
 
     /**
      * Default css classes collection
