@@ -9,6 +9,8 @@
 
 		$('#dir-create').doOnce(dirCreate.init);
 
+		$('#fileupload').doOnce(upload.init);
+
 		$('.alert').doOnce(alert.init);
 
 	});
@@ -16,6 +18,35 @@
 	/**
 	 * The rest of the code goes here!
 	 */
+
+
+	var upload = {
+		init: function(settings) {
+			upload.config = {
+				uploadInput: $('#fileupload'),
+				fileList: $('#list-filesystem')
+			};
+			// Allow overriding the default config
+			$.extend(upload.config, settings);
+			upload.setup();
+		},
+		setup: function() {
+			upload.config.uploadInput.fileupload(
+				{
+					dataType: 'json',
+					done: function (e, data) {
+						$.each(data.result.files, function (index, file) {
+							$('<li/>').text(file.name).appendTo(upload.config.fileList);
+						});
+					},
+					progressall: function (e, data) {
+						var progress = parseInt(data.loaded / data.total * 100, 10);
+						$('#progress .bar').css('width', progress + '%');
+					}
+				}
+			);
+		}
+	};
 
 	var dirCreate = {
 		init: function(settings) {

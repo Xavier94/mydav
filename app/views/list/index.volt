@@ -7,6 +7,10 @@
 				<ul class="nav-list">
 					<li class="nav-item">
 						<a class="pure-button" href="#">Add file</a>
+						<input id="fileupload" type="file" name="files[]" data-url="/list/upload" multiple>
+						<div id="progress">
+							<div class="bar" style="width:0"></div>
+						</div>
 					</li>
 					<li class="nav-item">
 						<a id="dir-create" class="pure-button" href="#">Create directory</a>

@@ -122,6 +122,11 @@ h3 {
     text-decoration: none;
 }
 
+#progress .bar {
+    height: 18px;
+    background: green;
+}
+
 #form-dir-create {
     display: none;
     }

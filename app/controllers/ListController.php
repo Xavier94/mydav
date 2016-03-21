@@ -39,19 +39,26 @@ class ListController extends ControllerBase
 
     public function uploadAction()
     {
+        $ret = array();
         // Check if the user has uploaded files
         if ($this->request->hasFiles())
         {
             // Print the real file names and sizes
             foreach ($this->request->getUploadedFiles() as $file)
             {
-                // Print file details
-                echo $file->getName(), " ", $file->getSize(), "\n";
+                // TODO: Here add filter extension, control, spyware, virus, etc...
+                $ret = array(
+                    'filename' => $file->getName(),
+                    'filesize' => $file->getSize()
+                );
                 // Move the file into the application
-                $file->moveTo(APP_PATH . 'data/' . $file->getName());
+                $file->moveTo(APP_PATH . 'data/xavier/' . $file->getName());
             }
         }
-        //$this->view->disable();
+        $this->view->disable();
+        $this->response->setContentType('application/json', 'UTF-8');
+        $this->response->setJsonContent($ret);
+        return $this->response;
     }
 
     public function createAction()
