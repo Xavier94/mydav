@@ -10,7 +10,7 @@
 				{{ link_to('list', 'Mes fichiers') }}
 			</p>
 
-			<p>{{ link_to('register', 'Créer un compte', 'class': 'pure-button') }}</p>
+			<p>{{ link_to('register', 'CrÃ©er un compte', 'class': 'pure-button') }}</p>
 		</div>
 	</div>
 

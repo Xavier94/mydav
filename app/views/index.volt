@@ -36,7 +36,7 @@
 		{% endfor %}
 	</div>
 
-	{{ javascript_include('js/jquery-1.12.0.min.js') }}
+	{{ javascript_include('js/jquery-1.12.2.min.js') }}
 	{{ javascript_include('js/script.js') }}
 </body>
 </html>
